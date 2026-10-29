@@ -29,6 +29,7 @@ class Cell3D
     this.starting_x = starting_x;
     this.starting_y = starting_y;
     this.starting_z = starting_z;
+    this.filled = false;
   }
 
   draw(stroke_color = 'black', stroke_weight = 3, is_filled = false, fill_color = 'white')
