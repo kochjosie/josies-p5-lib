@@ -8,10 +8,10 @@ class Cell
     this.y = y;
     this.cell_size = cell_size;
   }
-  draw(stroke_color = 'black', stroke_weight = 1, is_filled = false, fill_color = 'white')
+  draw(is_stroked, stroke_color = [0, 0, 0], stroke_weight = 1, is_filled = false, fill_color = [255, 255, 255])
   {
-    is_filled ? fill(fill_color) : noFill();
-    stroke(stroke_color);
+    is_filled ? fill(fill_color[0], fill_color[1], fill_color[2]) : noFill();
+    is_stroked ? stroke(stroke_color[0], stroke_color[1], stroke_color[2]) : noStroke();
     strokeWeight(stroke_weight);
     square(this.x, this.y, this.cell_size);
   }
@@ -32,16 +32,10 @@ class Cell3D
     this.filled = false;
   }
 
-  draw(stroke_color = 'black', stroke_weight = 3, is_filled = false, fill_color = 'white')
+  draw(is_stroked, stroke_color = [0, 0, 0], stroke_weight = 1, is_filled = false, fill_color = [255, 255, 255])
   {
-    is_filled ? fill(fill_color) : noFill();
-    //stroke(stroke_color);
-    stroke(
-      map(this.x, 0, width, 25, 255), // red
-      map(this.y, 0, height, 50, 200),  // green
-      map(this.z, 0, DEPTH, 25, 225)  // blue
-    );
-
+    is_filled ? fill(fill_color[0], fill_color[1], fill_color[2]) : noFill();
+    is_stroked ? stroke(stroke_color[0], stroke_color[1], stroke_color[2]) : noStroke();
     strokeWeight(stroke_weight);
 
     push();
@@ -79,10 +73,10 @@ function generate_3d_grid(grid_width, grid_height, grid_depth, cell_size, a = 0,
 {
   let grid = [];
 
-  for (let i = 0; i < (grid_height / cell_size); i++)
+  for (let i = 0; i < (grid_width / cell_size); i++)
   {
     grid[i] = [];
-    for (let j = 0; j < (grid_width / cell_size); j++)
+    for (let j = 0; j < (grid_height / cell_size); j++)
     {
       grid[i][j] = [];
       for (let k = 0; k < (grid_depth / cell_size); k++)
